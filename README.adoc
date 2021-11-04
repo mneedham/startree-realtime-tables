@@ -2,27 +2,27 @@
 
 This repository contains the code used in https://www.youtube.com/watch?v=jxERUAzb9Eo. 
 
-1. Clone this repository
-
+. Clone this repository
++
 ```
 git@github.com:mneedham/startree-realtime-tables.git
 cd startree-realtime-tables
 ```
 
-2. Build Docker image
-
+. Build Docker image
++
 ```
 docker build . -t gs-pinot
 ```
 
-3. Launch Docker container
-
+. Launch Docker container
++
 ```
 docker run -p 9000:9000 -it gs-pinot /bin/bash
 ```
 
-4. Launch Pinot components
-
+. Launch Pinot components
++
 ```
 ./pinot/bin/pinot-admin.sh StartZookeeper &
 ./pinot/bin/pinot-admin.sh StartController &
@@ -30,27 +30,28 @@ docker run -p 9000:9000 -it gs-pinot /bin/bash
 ./pinot/bin/pinot-admin.sh StartServer &
 ```
 
-5. Launch Kafka broker
-
+. Launch Kafka broker
++
 ```
 ./kafka/bin/kafka-server-start.sh ./kafka/config/server.properties &
 ```
 
-6. Create Pinot schema
-
+. Create Pinot schema
++
 ```
 ./pinot/bin/pinot-admin.sh AddSchema \
 -schemaFile ./realtime/pinot/realtime.schema.json -exec
 ```
-7. Create Pinot table
 
+. Create Pinot table
++
 ```
 ./pinot/bin/pinot-admin.sh AddTable \
 -tableConfigFile ./realtime/pinot/realtime.tableconfig.json -exec
 ```
 
-8. Import Wikipedia events
-
+. Import Wikipedia events
++
 ```
 node realtime/wikievents.js
 ```
