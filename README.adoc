@@ -2,3 +2,49 @@
 
 This repository contains the code used in https://www.youtube.com/watch?v=jxERUAzb9Eo. 
 
+1. Build Docker image
+
+```
+docker build . -t gs-pinot
+```
+
+2. Launch Docker container
+
+```
+docker run -p 9000:9000 -it gs-pinot /bin/bash
+```
+
+3. Launch Pinot components
+
+```
+./pinot/bin/pinot-admin.sh StartZookeeper &
+./pinot/bin/pinot-admin.sh StartController &
+./pinot/bin/pinot-admin.sh StartBroker &
+./pinot/bin/pinot-admin.sh StartServer &
+```
+
+4. Launch Kafka broker
+
+```
+./kafka/bin/kafka-server-start.sh ./kafka/config/server.properties &
+```
+
+5. Create Pinot schema
+
+```
+./pinot/bin/pinot-admin.sh AddSchema \
+-schemaFile ./realtime/pinot/realtime.schema.json -exec
+```
+
+6. Create Pinot table
+
+```
+./pinot/bin/pinot-admin.sh AddTable \
+-tableConfigFile ./realtime/pinot/realtime.tableconfig.json -exec
+```
+
+7. Import Wikipedia events
+
+```
+node realtime/wikievents.js
+```
