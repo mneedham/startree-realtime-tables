@@ -1,6 +1,6 @@
 = Real-time Tables in Apache Pinot
 
-This repository contains the code used in https://www.youtube.com/watch?v=jxERUAzb9Eo. 
+This repository contains the code used in https://www.youtube.com/watch?v=jxERUAzb9Eo[Real-time Tables in Apache Pinot], which shows how to import Wikipedia change events into Apache Pinot.
 
 . Clone this repository
 +
