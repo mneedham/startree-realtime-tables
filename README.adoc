@@ -1,0 +1,4 @@
+= Real-time Tables in Apache Pinot
+
+This repository contains the code used in https://www.youtube.com/watch?v=jxERUAzb9Eo. 
+
