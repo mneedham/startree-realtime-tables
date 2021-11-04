@@ -22,3 +22,5 @@ RUN mv kafka_2.13-2.8.1 kafka
 COPY kafka/server.properties /app/kafka/config/
 
 EXPOSE 9000
+EXPOSE 8000
+EXPOSE 8099
