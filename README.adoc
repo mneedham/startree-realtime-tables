@@ -1,0 +1,57 @@
+= Real-time Tables in Apache Pinot
+
+This repository contains the code used in https://www.youtube.com/watch?v=jxERUAzb9Eo[Real-time Tables in Apache Pinot], which shows how to import Wikipedia change events into Apache Pinot.
+
+. Clone this repository
++
+```
+git@github.com:mneedham/startree-realtime-tables.git
+cd startree-realtime-tables
+```
+
+. Build Docker image
++
+```
+docker build . -t gs-pinot
+```
+
+. Launch Docker container
++
+```
+docker run -p 9000:9000 -it gs-pinot /bin/bash
+```
+
+. Launch Pinot components
++
+```
+./pinot/bin/pinot-admin.sh StartZookeeper &
+./pinot/bin/pinot-admin.sh StartController &
+./pinot/bin/pinot-admin.sh StartBroker &
+./pinot/bin/pinot-admin.sh StartServer &
+```
+
+. Launch Kafka broker
++
+```
+./kafka/bin/kafka-server-start.sh ./kafka/config/server.properties &
+```
+
+. Create Pinot schema
++
+```
+./pinot/bin/pinot-admin.sh AddSchema \
+-schemaFile ./realtime/pinot/realtime.schema.json -exec
+```
+
+. Create Pinot table
++
+```
+./pinot/bin/pinot-admin.sh AddTable \
+-tableConfigFile ./realtime/pinot/realtime.tableconfig.json -exec
+```
+
+. Import Wikipedia events
++
+```
+node realtime/wikievents.js
+```
